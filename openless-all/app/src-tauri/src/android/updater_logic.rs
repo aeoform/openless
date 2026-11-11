@@ -2,7 +2,7 @@
 
 /// Must match `plugins.updater.pubkey` in `tauri.conf.json` (TAURI_SIGNING_PRIVATE_KEY pair).
 pub const UPDATER_PUBKEY_B64: &str =
-    "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDFERUFBODAzNTY0QzMyM0YKUldRL01reFdBNmpxSGE1K0JadlpONXNWTzhJcGZCRGxjUVdIWExNNFJpeUNsSGZwazdlQThhemkK";
+    "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNERDNEQzg1OTIxRTlCOEUKUldTT214NlNoZHpUUGJkN3Y4cXUxZEh2M01IaWdpVWdJR0ZkY3BWcFBHM2JUQ0kvUWNJTVY2T3oK";
 
 /// Returned when Kotlin `installApk` cannot open the system installer (e.g. missing install permission).
 pub const INSTALLER_NOT_OPENED_MSG: &str =

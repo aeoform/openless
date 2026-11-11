@@ -30,6 +30,10 @@ on:
     - cron: '17 4 * * 1'
   workflow_dispatch:
     inputs:
+      fork_rehearsal:
+        description: 'Fork-only full release rehearsal on an existing test tag'
+        type: boolean
+        default: false
       platform:
         description: Desktop platforms to build (branch builds do not publish)
         type: choice
@@ -57,7 +61,7 @@ concurrency:
 jobs:
   prepare-release:
     name: Prepare shared draft
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && endsWith(github.ref_name, '-tauri')
+    if: (github.event_name == 'push' || (github.repository == 'aeoform/openless' && inputs.fork_rehearsal)) && startsWith(github.ref, 'refs/tags/v') && endsWith(github.ref_name, '-tauri')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -892,7 +896,7 @@ jobs:
   android:
     name: Android release
     needs: prepare-release
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && endsWith(github.ref_name, '-tauri')
+    if: (github.event_name == 'push' || (github.repository == 'aeoform/openless' && inputs.fork_rehearsal)) && startsWith(github.ref, 'refs/tags/v') && endsWith(github.ref_name, '-tauri')
     permissions:
       contents: write
     uses: ./.github/workflows/android-apk.yml
@@ -901,7 +905,7 @@ jobs:
   harmony:
     name: HarmonyOS release
     needs: prepare-release
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && endsWith(github.ref_name, '-tauri')
+    if: (github.event_name == 'push' || (github.repository == 'aeoform/openless' && inputs.fork_rehearsal)) && startsWith(github.ref, 'refs/tags/v') && endsWith(github.ref_name, '-tauri')
     permissions:
       contents: write
     uses: ./.github/workflows/release-harmony.yml
